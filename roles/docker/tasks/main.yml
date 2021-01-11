@@ -1,0 +1,45 @@
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu bionic stable
+    state: present
+
+- name: Update apt and install docker-ce
+  apt:
+    update_cache: yes
+    name: docker-ce
+    state: latest
+
+- name: Install Docker Module for Python
+  pip:
+    name: docker
+
+- name: Install Docker Compose Dependency Packages
+  apt:
+    name: "{{ item }}"
+  become: true
+  loop:
+  - python3-pip
+  - libffi-dev
+
+# - name: Docker compose
+#   pip:
+#     name: 
+#       - docker-compose
+#     executable: pip3
+#   become: true
+
+- name: Install docker-compose
+  apt:
+    name: docker-compose
+  become: true
+
+- name: Clean up docker containers
+  cron:
+    name: clean up docker containers
+    special_time: weekly
+    job: docker system prune -af --volumes

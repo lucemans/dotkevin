@@ -1,0 +1,16 @@
+- name: Update repo's
+  apt:
+    update_cache: true
+  changed_when: false
+- name: Install Basic Packages
+  apt:
+    name: "{{ item }}"
+  loop:
+    - apt-transport-https
+    - net-tools
+    - curl
+    - gnupg2
+    - htop
+    - tmux
+    - git
+    - python3-pip

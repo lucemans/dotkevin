@@ -1,0 +1,4 @@
+- name: restart nginx
+  shell:
+    chdir: /opt/nginx
+    cmd: "{{ docker_update_command }}"
