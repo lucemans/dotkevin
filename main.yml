@@ -1,0 +1,15 @@
+---
+- name: Project Kevin
+  hosts: kevin_internal
+  become: true
+  tasks:
+    - name: Display the config
+      apt:
+        name:
+        - apt-transport-https
+        - net-tools
+        - curl
+        - gnupg
+        - htop
+        - tmux
+        - git
