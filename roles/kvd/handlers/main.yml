@@ -1,5 +1,5 @@
-- name: restart nginx
+- name: restart kvd
   shell:
-    chdir: /opt/nginx
+    chdir: /opt/kvd
     cmd: "{{ docker_update_command }}"
   become: true

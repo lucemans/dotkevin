@@ -1,0 +1,11 @@
+- name: reload systemd
+  shell:
+    chdir: /
+    cmd: "systemctl daemon-reload"
+  become: true
+
+- name: restart dak
+  shell:
+    chdir: /kevin
+    cmd: "systemctl restart kvnscreen"
+  become: true

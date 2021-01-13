@@ -1,0 +1,67 @@
+- name: Ensure that Chromium is installed.
+  apt:
+    name: chromium-browser
+    state: present
+  become: true
+
+- name: Ensure that Xinit is installed.
+  apt:
+    name: xinit
+    state: present
+  become: true
+
+- name: Ensure that unclutter is installed.
+  apt:
+    name: unclutter
+    state: present
+  become: true
+
+- name: Create install directory
+  file:
+    path: /kevin
+    state: directory
+    owner: "pi"
+  become: true
+
+- name: Ensure the init.sh exists
+  template:
+    src: files/init.sh
+    dest: /kevin/init.sh
+    owner: pi
+    group: pi
+  become: true
+  notify: restart dak
+
+- name: Ensure the start.sh exists
+  template:
+    src: files/start.sh
+    dest: /kevin/start.sh
+    owner: pi
+    group: pi
+  become: true
+  notify: restart dak
+
+- name: Ensure that systemd service is installed
+  template:
+    src: files/kvnscreen.service
+    dest: /etc/systemd/system/kvnscreen.service
+    owner: root
+    group: root
+  become: true
+  notify: reload systemd
+
+- name: Ensure that service autostarts
+  systemd:
+    name: kvnscreen
+    enabled: yes
+    state: started
+  become: true
+
+- name: Ensure that anyone can start a screen session
+  copy:
+    src: files/Xwrapper.config
+    dest: /etc/X11/Xwrapper.config
+    owner: root
+    group: root
+  become: true
+  notify: restart dak

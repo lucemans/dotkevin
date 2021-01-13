@@ -4,13 +4,23 @@
   changed_when: false
 - name: Install Basic Packages
   apt:
-    name: "{{ item }}"
-  loop:
-    - apt-transport-https
-    - net-tools
-    - curl
-    - gnupg2
-    - htop
-    - tmux
-    - git
-    - python3-pip
+    name:
+      - apt-transport-https
+      - net-tools
+      - curl
+      - pass
+      - gnupg2
+      - htop
+      - tmux
+      - git
+      - python3-dev
+      - python3-setuptools
+      - python3-pip
+- name: Change hostname
+  hostname:
+    name: kevin
+- name: ETC Hosts
+  lineinfile:
+    path: /etc/hosts
+    line: '127.0.1.1               kevin'
+  become: true

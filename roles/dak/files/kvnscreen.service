@@ -1,0 +1,14 @@
+[Unit]
+Description=Chromium Dashboard
+
+[Service]
+Environment=DISPLAY=:0.0
+Environment=XAUTHORITY=/home/pi/.Xauthority
+Type=simple
+ExecStart=/kevin/init.sh
+Restart=on-abort
+User=pi
+Group=pi
+
+[Install]
+WantedBy=multi-user.target

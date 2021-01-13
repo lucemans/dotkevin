@@ -1,2 +1,2 @@
 [kevin_internal]
-kevin ansible_user=ubuntu
+kevin ansible_user=pi

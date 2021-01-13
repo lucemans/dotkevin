@@ -1,6 +1,6 @@
 - name: Create install directory
   file:
-    path: /opt/nginx
+    path: /opt/kvd
     state: directory
     owner: "pi"
   become: true
@@ -8,7 +8,7 @@
 - name: Install compose file
   template:
     src: files/docker-compose.yml
-    dest: /opt/nginx/docker-compose.yml
+    dest: /opt/kvd/docker-compose.yml
     owner: "pi"
-  notify: restart nginx
+  notify: restart kvd
   become: true
