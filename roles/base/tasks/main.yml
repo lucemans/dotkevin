@@ -22,5 +22,5 @@
 - name: ETC Hosts
   lineinfile:
     path: /etc/hosts
-    line: '127.0.1.1               kevin'
+    line: '127.0.0.1               kevin'
   become: true
